@@ -1,3 +1,4 @@
+import com.mysql.cj.api.exceptions.ExceptionInterceptor
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.PreparedStatement
@@ -8,6 +9,26 @@ class Customers {
 
     fun addCustomer(firstName: String, lastName: String, cpf: Int, rg: String, socialSecurity: String, country: String,
                     city: String, address: String, zipcode: Int, phone: Int, email: String) {
+
+
+        try {
+            var addNewCustomer: String = "INSERT INTO `therp`.`customers` (`firstName`, `lastName`, `cpf`, `registroGeral`, " +
+                    " `socialSecurity`, `country`, `city`, `address`, `zipcode`, `phone`, `email`) VALUES ('" + firstName.trim() + "'," +
+                    "'" + lastName.trim() + "', '" + cpf.toString().trim().toInt() + "', '" + rg.trim() + "', '" + socialSecurity.trim() + "', '" + country.trim() + "', '" + city.trim() + "', '" + address.trim() + "', '" + zipcode + "', " +
+                    "'" + phone.toString().trim().toInt() + "','" + email.trim() + "');\n"
+
+            Class.forName(theClassName.theClassName)
+            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            var ps: PreparedStatement = conn.prepareStatement(addNewCustomer)
+            ps.execute()
+
+        }catch (e: Exception){
+            println("Error: " + e.message)
+        }
+
+
+
+
     }
 
 
@@ -198,12 +219,8 @@ class Customers {
 
     }
 
-    fun deleteCustomer() {
 
-    }
-
-
-}
+}//End of the Customer Class
 
 
 
@@ -212,20 +229,5 @@ class Customers {
 
 
 fun main(args: Array<String>) {
-
-    var db = Customers()
-
-    println("Search by First Name")
-    db.searchCustomerByFirstName(" Hecton ")
-    println("Search by Last Name")
-    db.searchCustomerByLastName("Domingos")
-
-    println("Search by CPF")
-    db.searchCustomerBycpf(1111111)
-    println("Search by Social Security")
-    db.searchCustomerBySocialSecurity("333333")
-
-    println("Search by Phone Number")
-    db.searchCustomerByPhone(44444)
 
 }

@@ -27,8 +27,6 @@ open class addCustumers(firstName: String, lastName: String, cpf:Int, rg:String,
         this.zipcode = zipcode
         this.phone = phone
 
-
-
         println("Custumer added")
         addedCustomers()
 
