@@ -30,11 +30,11 @@ open class addCustumers(firstName: String, lastName: String, cpf:Int, rg:String,
 
 
         println("Custumer added")
-        addedCustumers()
+        addedCustomers()
 
     }
 
-    fun addedCustumers(){
+    fun addedCustomers(){
         println("Added the customer ${firstName}")
     }
 
