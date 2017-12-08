@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03dae8e4-e169-4a43-82e6-6bec3874e394" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/dbConfig.kt" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBConnection.kt" afterPath="$PROJECT_DIR$/src/main/java/DbProcedures.kt" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/custumers.kt" afterPath="$PROJECT_DIR$/src/main/java/customers.kt" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBConnection$Customers.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBConnection.class" afterPath="$PROJECT_DIR$/target/classes/DBConnection.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBConnectionKt.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DbProcedures.kt" afterPath="$PROJECT_DIR$/src/main/java/DbProcedures.kt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -37,8 +30,8 @@
       <file leaf-file-name="DbProcedures.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/DbProcedures.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="807">
-              <caret line="213" column="44" lean-forward="true" selection-start-line="213" selection-start-column="44" selection-end-line="213" selection-end-column="44" />
+            <state relative-caret-position="316">
+              <caret line="199" column="0" lean-forward="true" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
               <folding>
                 <element signature="e#0#116#0" expanded="true" />
               </folding>
@@ -524,8 +517,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DbProcedures.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="807">
-          <caret line="213" column="44" lean-forward="true" selection-start-line="213" selection-start-column="44" selection-end-line="213" selection-end-column="44" />
+        <state relative-caret-position="316">
+          <caret line="199" column="0" lean-forward="true" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
           <folding>
             <element signature="e#0#116#0" expanded="true" />
           </folding>

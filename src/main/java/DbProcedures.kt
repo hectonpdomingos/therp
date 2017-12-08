@@ -189,7 +189,12 @@ class Customers {
 
     }
 
-    fun updateCustomer() {
+    fun updateCustomer(updateCustomerField: String, updateCustomerInfo: String, idCustomer: Int) {
+        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim() + "'"
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var psDelete: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
+        psDelete.execute()
 
     }
 
