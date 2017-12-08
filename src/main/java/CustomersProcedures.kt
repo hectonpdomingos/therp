@@ -21,7 +21,9 @@ class Customers {
             var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
             var ps: PreparedStatement = conn.prepareStatement(addNewCustomer)
             ps.execute()
-
+            println()
+            println(" Success! The customer was added!")
+            println()
         }catch (e: Exception){
             println("Error: " + e.message)
         }

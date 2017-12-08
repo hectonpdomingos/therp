@@ -42,12 +42,12 @@ fun main(args: Array<String>) {
                     println("1 - Search - Find a specific costumer")
                     println("2 - Add - Add a new client on the database")
                     println("3 - Modify - Modify the client already in the database")
-                    println("4 - Disable the user from database ")
+                    println("4 - List all users from database ")
                     println("0 - Exit")
                     println()
                     println("##################################################################################")
                     var op1 = readLine()!!.toInt()
-
+                    var add = Customers()
                     when(op1){
 
 
@@ -56,17 +56,51 @@ fun main(args: Array<String>) {
                         }
 
                         2 ->{
+                            println()
+                            println("Customer's first name: ")
+                            var insertFirstName = readLine()!!.toString().trim()
+                            println("Customer's last name: ")
+                            var insertLastName: String = readLine()!!.toString().trim()
+                            println("Which nacionality is the customer?")
+                            println("1: Brasilian  | 2: American")
+                            var insertNacionality = readLine()!!.toInt()
 
-                            //  name, fullName, cpf, RG, Social Security, Country, City, Address, ZipCode, email, phone
+                            var insertCpf = 0
+                            var insertRegistroGeral = "0"
+                            var insertCountry = ""
+                            var insertSocialSecurity = ""
+                            if (insertNacionality == 1){
+                                println("Customer's CPF: ")
+                                 insertCpf = readLine()!!.toInt()
+                                println("Customer's Registro Geral:")
+                                insertRegistroGeral = readLine()!!.toString().trim()
+                                insertCountry = "Brasil"
+                            }else{
+                                insertCountry = "EUA"
+                                insertCpf = 0
+                                println("Insert Social Security number:")
+                                insertSocialSecurity = readLine().toString().trim()
+                            }
+                            println("Customer's current city: ")
+                            var insertCity = readLine()!!.toString().trim()
+                            println("Customer's Full Address:")
+                            var insertAddress = readLine()!!.toString().trim()
+                            println("Customer's Zipcode: ")
+                            var insertZipcode = readLine()!!.toInt()
+                            println("Customer's phone nunmber: ")
+                            var insertPhone = readLine()!!.toInt()
+                            println("Customer's Email: ")
+                            var insertEmail = readLine()!!.toString().trim()
 
-                            addCustumers("Hecton", "Domingos",1111,"MG99999","mg89898989","Brazil","Manhu","RJRS",369000,841999999)
+                            add.addCustomer(insertFirstName, insertLastName, insertCpf, insertRegistroGeral,insertSocialSecurity , insertCountry,insertCity, insertAddress, insertZipcode, insertPhone, insertEmail)
 
+                            //addCustomers(insertFirstName, insertLastName, insertCpf, insertRegistroGeral,insertSocialSecurity , insertCountry,insertCity, insertAddress, insertZipcode, insertPhone, insertEmail )
                         }
                         3 ->{
 
                         }
                         4 ->{
-
+                            add.listCustomers()
                         }
                         0 ->{
                             exitOp1 = true
