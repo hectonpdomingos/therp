@@ -57,6 +57,10 @@ fun main(args: Array<String>) {
 
                         2 ->{
 
+                            //  name, fullName, cpf, RG, Social Security, Country, City, Address, ZipCode, email, phone
+
+                            addCustumers("Hecton", "Domingos",1111,"MG99999","mg89898989","Brazil","Manhu","RJRS",369000,841999999)
+
                         }
                         3 ->{
 
@@ -102,6 +106,7 @@ fun main(args: Array<String>) {
             //Exit Program
             0 ->{
               exitProgram = true
+                println("Bye!")
             }
         }
 
