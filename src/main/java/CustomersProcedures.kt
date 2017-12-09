@@ -122,6 +122,40 @@ class Customers {
 
     }
 
+
+
+    fun searchCustomerByEmail(searchByEmail: String) {
+        println("The result of your search...")
+        println("")
+        var findQuery = "SELECT * FROM customers WHERE email LIKE'%"+searchByEmail.trim()+"%'"
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var ps: PreparedStatement = conn.prepareStatement(findQuery)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()) {
+
+            println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
+                    " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
+                    " (Registro Geral (BR)): " + rs.getString("registroGeral") +
+                    " (Social Security (USA)): " + rs.getString("socialSecurity") + "\n" +
+                    " (Country): " + rs.getString("country") + " (City) : " + rs.getString("city") +
+                    " (Address): " + rs.getString("address") + " (Zipcode): " + rs.getString("zipcode") +
+                    " (Phone): " + rs.getString("phone") + " (Email): " + rs.getString("email") +
+                    " (Added in): " + rs.getString("created")
+            )
+            println()
+        }
+        println("")
+        println("Press any key to back to menu")
+        println("")
+        readLine()
+
+
+
+    }
+
+
+
     fun searchCustomerBycpf(searchBycpf: Int) {
         println("The result of your search...")
         println("")
@@ -212,7 +246,7 @@ class Customers {
 
     }
 
-    fun updateCustomer(updateCustomerField: String, updateCustomerInfo: String, idCustomer: Int) {
+    fun updateCustomerStringField(updateCustomerField: String, updateCustomerInfo: String, idCustomer: Int) {
         var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim() + "'"
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
@@ -220,7 +254,14 @@ class Customers {
         psDelete.execute()
 
     }
+    fun updateCustomerIntFields(updateCustomerField: String, updateCustomerInfo: Int, idCustomer: Int) {
+        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim() + "'"
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var psDelete: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
+        psDelete.execute()
 
+    }
 
 }//End of the Customer Class
 
