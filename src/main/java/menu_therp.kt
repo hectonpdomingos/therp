@@ -35,7 +35,8 @@ fun main(args: Array<String>) {
 
                 var exitOp1 = false
                 do {
-                    println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                            println()
+                            println("######### The Hecton's Enterprise Resource Planning Menu ############### ")
                     println()
                     println("___Menu -> Customers _____")
                     println()
@@ -47,12 +48,12 @@ fun main(args: Array<String>) {
                     println()
                     println("##################################################################################")
                     var op1 = readLine()!!.toInt()
-                    var add = Customers()
+                    var objCustomer = Customers()
                     when(op1){
 
 
                         1 ->{
-
+                            objCustomer.searchEngine()
                         }
 
                         2 ->{
@@ -70,7 +71,7 @@ fun main(args: Array<String>) {
                             println("1: Brasilian  | 2: American")
                             var insertNacionality = readLine()!!.toInt()
 
-                            var insertCpf = 0
+                            var insertCpf: Int? = 0
                             var insertRegistroGeral = "0"
                             var insertCountry = ""
                             var insertSocialSecurity = ""
@@ -97,9 +98,8 @@ fun main(args: Array<String>) {
                             println("Customer's Email: ")
                             var insertEmail = readLine()!!.toString().trim()
 
-                            add.addCustomer(insertFirstName, insertLastName, insertCpf, insertRegistroGeral,insertSocialSecurity , insertCountry,insertCity, insertAddress, insertZipcode, insertPhone, insertEmail)
+                            objCustomer.addCustomer(insertFirstName, insertLastName, insertCpf, insertRegistroGeral,insertSocialSecurity , insertCountry,insertCity, insertAddress, insertZipcode, insertPhone, insertEmail)
 
-                            //addCustomers(insertFirstName, insertLastName, insertCpf, insertRegistroGeral,insertSocialSecurity , insertCountry,insertCity, insertAddress, insertZipcode, insertPhone, insertEmail )
                         }
                         3 ->{
                             println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
@@ -117,40 +117,42 @@ fun main(args: Array<String>) {
                                 if (searchBy == 1){
                                     println("What is the customer's first name? ")
                                     var searchByName = readLine()!!.toString()
-                                    add.searchCustomerByFirstName(searchByName)
+                                    objCustomer.searchCustomerByFirstName(searchByName)
                                     println()
                                 }else if(searchBy == 2){
                                     println("What is the customer's Last Name? ")
                                     var searchByLName = readLine()!!.toString()
-                                    add.searchCustomerByLastName(searchByLName)
+                                    objCustomer.searchCustomerByLastName(searchByLName)
                                     println()
 
                                 }else if (searchBy == 3){
                                     println("What is the customer's cpf ")
                                     var searchBycpf = readLine()!!.toInt()
-                                    add.searchCustomerBycpf(searchBycpf)
+                                    objCustomer.searchCustomerBycpf(searchBycpf)
                                     println()
                                 }else if (searchBy == 4){
                                     println("What is the customer's Social Security? ")
                                     var searchBySocialSecurity = readLine()!!.toString()
-                                    add.searchCustomerBySocialSecurity(searchBySocialSecurity)
+                                    objCustomer.searchCustomerBySocialSecurity(searchBySocialSecurity)
                                     println()
 
                                 }else if (searchBy == 5){
                                     println("What is the customer's phone? ")
                                     var searchByphone = readLine()!!.toString().trim().toInt()
-                                    add.searchCustomerByPhone(searchByphone)
+                                    objCustomer.searchCustomerByPhone(searchByphone)
                                     println()
 
                                 }else if (searchBy == 6){
                                     println("What is the customer's email? ")
                                     var searchByEmail = readLine()!!.toString().trim()
-                                    add.searchCustomerByEmail(searchByEmail)
+                                    objCustomer.searchCustomerByEmail(searchByEmail)
                                     println()
                                 }else {
                                     println("Wrong option number! Start again!")
                                 }
                             }else if (whichCustomer == 2){
+
+                                objCustomer.listCustomers()
 
                             }else{
                                 println("Wrong option, choose 1 or 2")
@@ -208,13 +210,14 @@ fun main(args: Array<String>) {
 
                             if (field == "cpf" || field == "zipcode" || field == "phone" ){
 
-                                add.updateCustomerIntFields(field, fieldValue.toString().trim().toInt(), customerID)
+                                objCustomer.updateCustomerIntFields(field, fieldValue.toString().trim().toInt(), customerID)
                             }else
                             {
-                                add.updateCustomerStringField(field, fieldValue.toString(), customerID)
+                                objCustomer.updateCustomerStringField(field, fieldValue.toString(), customerID)
                             }
 
 
+                          println()
 
 
 
@@ -222,7 +225,7 @@ fun main(args: Array<String>) {
 
                         }
                         4 ->{
-                            add.listCustomers()
+                            objCustomer.listCustomers()
                         }
                         0 ->{
                             exitOp1 = true

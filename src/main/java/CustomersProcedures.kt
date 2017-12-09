@@ -159,7 +159,7 @@ class Customers {
     fun searchCustomerBycpf(searchBycpf: Int) {
         println("The result of your search...")
         println("")
-        var findQuery = "SELECT * FROM customers WHERE cpf LIKE'%"+searchBycpf.toString().trim()+"%'"
+        var findQuery = "SELECT * FROM customers WHERE cpf LIKE'%"+searchBycpf.toString().trim().toInt()+"%'"
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
@@ -247,23 +247,83 @@ class Customers {
     }
 
     fun updateCustomerStringField(updateCustomerField: String, updateCustomerInfo: String, idCustomer: Int) {
-        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim() + "'"
+
+        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
-        var psDelete: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
-        psDelete.execute()
+        var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
+        psUpdate.execute()
+        println("Customer Updated!")
+
 
     }
     fun updateCustomerIntFields(updateCustomerField: String, updateCustomerInfo: Int, idCustomer: Int) {
-        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim() + "'"
+        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
-        var psDelete: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
-        psDelete.execute()
+        var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
+        psUpdate.execute()
+
+        println("Customer Updated!")
+
+    }
+
+
+
+    fun searchEngine(){
+        var add = Customers()
+
+        println("1 search || 2 list all")
+        var whichCustomer = readLine()!!.toInt()
+        if (whichCustomer == 1) {
+            println()
+            println("Search using: 1 name | 2 last name | 3 cpf | 4 social security | 5 phone | 6 email")
+            var searchBy: Int = readLine()!!.toInt()
+            if (searchBy == 1) {
+                println("What is the customer's first name? ")
+                var searchByName = readLine()!!.toString()
+                add.searchCustomerByFirstName(searchByName)
+                println()
+            } else if (searchBy == 2) {
+                println("What is the customer's Last Name? ")
+                var searchByLName = readLine()!!.toString()
+                add.searchCustomerByLastName(searchByLName)
+                println()
+
+            } else if (searchBy == 3) {
+                println("What is the customer's cpf ")
+                var searchBycpf = readLine()!!.toInt()
+                add.searchCustomerBycpf(searchBycpf)
+                println()
+            } else if (searchBy == 4) {
+                println("What is the customer's Social Security? ")
+                var searchBySocialSecurity = readLine()!!.toString()
+                add.searchCustomerBySocialSecurity(searchBySocialSecurity)
+                println()
+
+            } else if (searchBy == 5) {
+                println("What is the customer's phone? ")
+                var searchByphone = readLine()!!.toString().trim().toInt()
+                add.searchCustomerByPhone(searchByphone)
+                println()
+
+            } else if (searchBy == 6) {
+                println("What is the customer's email? ")
+                var searchByEmail = readLine()!!.toString().trim()
+                add.searchCustomerByEmail(searchByEmail)
+                println()
+            } else {
+                println("Wrong option number! Start again!")
+            }
+        }else if(whichCustomer == 2){
+            add.listCustomers()
+        }
 
     }
 
 }//End of the Customer Class
+
+
 
 
 
