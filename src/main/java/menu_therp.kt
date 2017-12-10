@@ -171,7 +171,7 @@ fun main(args: Array<String>) {
                             var field: String = ""
 
                             if (fieldToModify == 1){
-                                field = "name"
+                                field = "firstName"
                             }else if(fieldToModify == 2){
                                 field = "lastName"
                             }else if(fieldToModify == 3){

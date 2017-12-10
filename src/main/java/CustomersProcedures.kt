@@ -248,7 +248,9 @@ class Customers {
 
     fun updateCustomerStringField(updateCustomerField: String, updateCustomerInfo: String, idCustomer: Int) {
 
-        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
+        var queryUpdateCustomerInfo: String = "UPDATE customers set " + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
+
+        println(queryUpdateCustomerInfo)
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
         var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
@@ -258,7 +260,7 @@ class Customers {
 
     }
     fun updateCustomerIntFields(updateCustomerField: String, updateCustomerInfo: Int, idCustomer: Int) {
-        var queryUpdateCustomerInfo: String = "UPDATE customers set" + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
+        var queryUpdateCustomerInfo: String = "UPDATE customers set " + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
         var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
