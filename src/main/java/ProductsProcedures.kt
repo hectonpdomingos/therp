@@ -33,7 +33,18 @@ class product{
 
     }
 
-    fun searchProduct(){
+    fun searchBarcodeProduct(barcode:String){
+        var querySearchBarcode: String = "Select * from products where barcode='$barcode'"
+
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var ps: PreparedStatement = conn.prepareStatement(querySearchBarcode)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()) {
+          println("-> (ID): " + rs.getString("id") + " (Name): " + rs.getString("name") + " (Model): " + rs.getString("model")+
+                  " (N Price): " + rs.getString("normalPrice") + " (L Price): " + rs.getString("lastPrice"))
+        }
+
 
     }
 
@@ -65,4 +76,9 @@ class product{
 
 
 
+}
+
+fun main(args: Array<String>) {
+    var o = product()
+    o.searchBarcodeProduct("0001")
 }
