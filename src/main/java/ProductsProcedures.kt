@@ -79,6 +79,5 @@ class product{
 }
 
 fun main(args: Array<String>) {
-    var o = product()
-    o.searchBarcodeProduct("0001")
+
 }
