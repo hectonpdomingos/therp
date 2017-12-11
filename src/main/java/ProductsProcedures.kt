@@ -8,11 +8,11 @@ class product{
 
 
 
-    fun addProduct(name: String, model: String, manufactuter: String, country:String, size:Double, weight:Double,
+    fun addProduct(name: String, model: String, manufactuter: String, country:String, size:String, weight:Double,
                    type:String, barcode:String, cost:Double, normalPrice:Double,lastPrice:Double, totalTax:Double){
         var queryAddProduct = "INSERT INTO `therp`.`products` (`name`, `model`, `manufacturer`, `country`, `size`, `weight`, `type`, `barcode`, `cost`," +
-                "`normalPrice`, `lastPrice`) VALUES ('"+name+"', '"+model+"', '"+manufactuter+"', '"+country+"', '"+size+"', '"+weight+"', '"+type+"'," +
-                "'"+barcode+"', '"+cost+"', '"+lastPrice+"', '"+totalTax+"')"
+                "`normalPrice`, `lastPrice`, `totalTax`) VALUES ('"+name+"', '"+model+"', '"+manufactuter+"', '"+country+"', '"+size+"', '"+weight+"', '"+type+"'," +
+                "'"+barcode+"', '"+cost+"','"+normalPrice+"', '"+lastPrice+"', '"+totalTax+"');\n"
         try{
 
             Class.forName(theClassName.theClassName)
@@ -75,9 +75,5 @@ class product{
     }
 
 
-
-}
-
-fun main(args: Array<String>) {
 
 }
