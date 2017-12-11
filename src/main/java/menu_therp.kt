@@ -244,7 +244,6 @@ fun main(args: Array<String>) {
                 var menuProduct = false
                 do {
 
-
                     println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
                     println()
                     println("___Main Menu -> Products -> Choose one of the options bellow_____")
@@ -263,6 +262,10 @@ fun main(args: Array<String>) {
                     when (menuProductOptions) {
 
                         1 -> {
+                            println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                            println()
+                            println("___Main Menu -> Products -> Listting all products")
+
 
                             println()
                             println("List of all products on database: For specific product, choose the option 2.")
@@ -273,6 +276,10 @@ fun main(args: Array<String>) {
                         }
 
                         2 -> {
+                            println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                            println()
+                            println("___Main Menu -> Products -> Search Product By Barcode")
+
                             println()
                             println("Type the Barcode's product")
                             var searchBarCode = readLine()!!.toString().trim()
@@ -290,6 +297,39 @@ fun main(args: Array<String>) {
 
                         }
                         4 -> {
+                            println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                            println()
+                            println("___Main Menu -> Products -> Add a new item (product) on database")
+
+                            println()
+                            println("Type the name of the new item on database. Ex: ASUS P5148")
+                            var addProductName = readLine()!!.toString().trim()
+                            println("Type the product's model. Ex: WD0234")
+                            var addProductModel =  readLine()!!.toString().trim()
+                            println("Type the manufacturer. Ex: Samsung")
+                            var addProductManufacturer = readLine()!!.toString().trim()
+                            println("The country that the product come from. Ex: USA")
+                            var addProductCountry  = readLine()!!.toString().trim()
+                            println("The product's dimensions. Ex: 11x9.5x2.5")
+                            var addProductSize  = readLine()!!.toString().trim()
+                            println("The product's weight")
+                            var addProductWeight  = readLine()!!.toString().trim().toDouble()
+                            println("The product's type")
+                            var addProductType  = readLine()!!.toString().trim()
+                            println("The product's barcode")
+                            var addProductBarcode  = readLine()!!.toString().trim()
+                            println("The product's cost")
+                            var addProductCost  = readLine()!!.toDouble()
+                            println("The product's normal price")
+                            var addProductNPrice  = readLine()!!.toString().trim().toDouble()
+                            println("The product's last price (changed)")
+                            var addProductLPrice  = readLine()!!.toString().trim().toDouble()
+                            println("The product's total tax")
+                            var addProductTTax  = readLine()!!.toString().trim().toDouble()
+
+                            productProcedures.addProduct(addProductName,addProductModel,addProductManufacturer,addProductCountry,addProductSize,addProductWeight,addProductType,
+                                    addProductBarcode,addProductCost,addProductNPrice,addProductLPrice,addProductTTax)
+
 
                         }
 
@@ -299,9 +339,6 @@ fun main(args: Array<String>) {
                         }
                     }
                 } while (!menuProduct)
-
-                var objProduct = product()
-                objProduct.listAllProduct()
 
             }//End of PRODUCT Menu
 
