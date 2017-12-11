@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     var exitProgram = false
 
     //start a while loop to show the program menu
-    do{
+    do {
 
         println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
         println()
@@ -26,17 +26,22 @@ fun main(args: Array<String>) {
         println("0 - Exit")
         println()
         println("##################################################################################")
-        var op = readLine()!!.toInt()
+        var mainMenu = readLine()!!.toString().trim()
+        if (mainMenu.equals("")) {
+            println()
+            println("Type the right option...")
+        }else{
+         var op = mainMenu.toInt()
 
-        when(op){
+        when (op) {
 
-            //Option 1
-            1 ->{
+        //Option 1
+            1 -> {
 
                 var exitOp1 = false
                 do {
-                            println()
-                            println("######### The Hecton's Enterprise Resource Planning Menu ############### ")
+                    println()
+                    println("######### The Hecton's Enterprise Resource Planning Menu ############### ")
                     println()
                     println("___Menu -> Customers _____")
                     println()
@@ -48,15 +53,17 @@ fun main(args: Array<String>) {
                     println()
                     println("##################################################################################")
                     var op1 = readLine()!!.toInt()
+
+
                     var objCustomer = Customers()
-                    when(op1){
+                    when (op1) {
 
 
-                        1 ->{
+                        1 -> {
                             objCustomer.searchEngine()
                         }
 
-                        2 ->{
+                        2 -> {
                             println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
                             println()
                             println("___Menu -> Customers - > Add New Customer_____")
@@ -75,13 +82,13 @@ fun main(args: Array<String>) {
                             var insertRegistroGeral = "0"
                             var insertCountry = ""
                             var insertSocialSecurity = ""
-                            if (insertNacionality == 1){
+                            if (insertNacionality == 1) {
                                 println("Customer's CPF: ")
-                                 insertCpf = readLine()!!.toInt()
+                                insertCpf = readLine()!!.toInt()
                                 println("Customer's Registro Geral:")
                                 insertRegistroGeral = readLine()!!.toString().trim()
                                 insertCountry = "Brasil"
-                            }else{
+                            } else {
                                 insertCountry = "EUA"
                                 insertCpf = 0
                                 println("Insert Social Security number:")
@@ -94,14 +101,14 @@ fun main(args: Array<String>) {
                             println("Customer's Zipcode: ")
                             var insertZipcode = readLine()!!.toInt()
                             println("Customer's phone nunmber: ")
-                            var insertPhone = readLine()!!.toInt()
+                            var insertPhone: Int = readLine()!!.toInt()
                             println("Customer's Email: ")
                             var insertEmail = readLine()!!.toString().trim()
 
-                            objCustomer.addCustomer(insertFirstName, insertLastName, insertCpf, insertRegistroGeral,insertSocialSecurity , insertCountry,insertCity, insertAddress, insertZipcode, insertPhone, insertEmail)
+                            objCustomer.addCustomer(insertFirstName, insertLastName, insertCpf, insertRegistroGeral, insertSocialSecurity, insertCountry, insertCity, insertAddress, insertZipcode, insertPhone, insertEmail)
 
                         }
-                        3 ->{
+                        3 -> {
                             println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
                             println()
                             println("___Menu -> Customers -> Modify the Customer Information _____")
@@ -110,51 +117,51 @@ fun main(args: Array<String>) {
                             println("Do you search the user or list all?")
                             println("1 search || 2 list all")
                             var whichCustomer = readLine()!!.toInt()
-                            if (whichCustomer == 1){
+                            if (whichCustomer == 1) {
                                 println()
                                 println("Search using: 1 name | 2 last name | 3 cpf | 4 social security | 5 phone | 6 email")
-                                var searchBy:Int = readLine()!!.toInt()
-                                if (searchBy == 1){
+                                var searchBy: Int = readLine()!!.toInt()
+                                if (searchBy == 1) {
                                     println("What is the customer's first name? ")
                                     var searchByName = readLine()!!.toString()
                                     objCustomer.searchCustomerByFirstName(searchByName)
                                     println()
-                                }else if(searchBy == 2){
+                                } else if (searchBy == 2) {
                                     println("What is the customer's Last Name? ")
                                     var searchByLName = readLine()!!.toString()
                                     objCustomer.searchCustomerByLastName(searchByLName)
                                     println()
 
-                                }else if (searchBy == 3){
+                                } else if (searchBy == 3) {
                                     println("What is the customer's cpf ")
                                     var searchBycpf = readLine()!!.toInt()
                                     objCustomer.searchCustomerBycpf(searchBycpf)
                                     println()
-                                }else if (searchBy == 4){
+                                } else if (searchBy == 4) {
                                     println("What is the customer's Social Security? ")
                                     var searchBySocialSecurity = readLine()!!.toString()
                                     objCustomer.searchCustomerBySocialSecurity(searchBySocialSecurity)
                                     println()
 
-                                }else if (searchBy == 5){
+                                } else if (searchBy == 5) {
                                     println("What is the customer's phone? ")
                                     var searchByphone = readLine()!!.toString().trim().toInt()
                                     objCustomer.searchCustomerByPhone(searchByphone)
                                     println()
 
-                                }else if (searchBy == 6){
+                                } else if (searchBy == 6) {
                                     println("What is the customer's email? ")
                                     var searchByEmail = readLine()!!.toString().trim()
                                     objCustomer.searchCustomerByEmail(searchByEmail)
                                     println()
-                                }else {
+                                } else {
                                     println("Wrong option number! Start again!")
                                 }
-                            }else if (whichCustomer == 2){
+                            } else if (whichCustomer == 2) {
 
                                 objCustomer.listCustomers()
 
-                            }else{
+                            } else {
                                 println("Wrong option, choose 1 or 2")
                             }
 
@@ -164,42 +171,35 @@ fun main(args: Array<String>) {
                             println()
                             println("Which field do you want modify? Type the number ")
                             println()
-                            println("1 Name | 2 Last Name | 3 CPF | 4 RG | 5 Social Security | 6 Country | 7 City " )
+                            println("1 Name | 2 Last Name | 3 CPF | 4 RG | 5 Social Security | 6 Country | 7 City ")
                             println("8 Address | 9 Zipcode | 10 Phone | 11 Email ")
                             var fieldToModify = readLine()!!.toInt()
 
                             var field: String = ""
 
-                            if (fieldToModify == 1){
+                            if (fieldToModify == 1) {
                                 field = "firstName"
-                            }else if(fieldToModify == 2){
+                            } else if (fieldToModify == 2) {
                                 field = "lastName"
-                            }else if(fieldToModify == 3){
+                            } else if (fieldToModify == 3) {
                                 field = "cpf"
-                            }else if(fieldToModify == 4){
+                            } else if (fieldToModify == 4) {
                                 field = "rg"
-                            }
-                            else if(fieldToModify == 5){
+                            } else if (fieldToModify == 5) {
                                 field = "socialSecurity"
-                            }
-                            else if(fieldToModify == 6){
+                            } else if (fieldToModify == 6) {
                                 field = "country"
-                            }
-                            else if(fieldToModify == 7){
+                            } else if (fieldToModify == 7) {
                                 field = "city"
-                            }
-                            else if(fieldToModify == 8){
+                            } else if (fieldToModify == 8) {
                                 field = "address"
-                            }
-                            else if(fieldToModify == 9){
+                            } else if (fieldToModify == 9) {
                                 field = "zipcode"
-                            }
-                            else if(fieldToModify == 10){
+                            } else if (fieldToModify == 10) {
                                 field = "phone"
-                            }
-                            else if(fieldToModify == 11){
+                            } else if (fieldToModify == 11) {
                                 field = "email"
-                            }else {
+                            } else {
                                 println()
                                 println("Wrong field number!")
 
@@ -208,26 +208,22 @@ fun main(args: Array<String>) {
                             println("Your chose the ${field} field. Which value do you want to put in? ")
                             var fieldValue = readLine()
 
-                            if (field == "cpf" || field == "zipcode" || field == "phone" ){
+                            if (field == "cpf" || field == "zipcode" || field == "phone") {
 
                                 objCustomer.updateCustomerIntFields(field, fieldValue.toString().trim().toInt(), customerID)
-                            }else
-                            {
+                            } else {
                                 objCustomer.updateCustomerStringField(field, fieldValue.toString(), customerID)
                             }
 
 
-                          println()
-
-
-
+                            println()
 
 
                         }
-                        4 ->{
+                        4 -> {
                             objCustomer.listCustomers()
                         }
-                        0 ->{
+                        0 -> {
                             exitOp1 = true
 
                         }
@@ -236,40 +232,98 @@ fun main(args: Array<String>) {
                     } //End of the when opt1
 
 
-
-
-                }while (!exitOp1)
+                } while (!exitOp1)
                 //End of the option 1
 
 
+            }
+
+        //Option 2 MAIN Menu Products
+            2 -> {
+                var productProcedures = product()
+                var menuProduct = false
+                do {
+
+
+                    println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                    println()
+                    println("___Main Menu -> Products -> Choose one of the options bellow_____")
+                    println()
+                    println("1 - List all Products")
+                    println("2 - Search my Barcode")
+                    println("3 - Modify product info")
+                    println("4 - Add product")
+                    println("0 - Exit")
+                    println()
+                    println("##################################################################################")
+
+                    println()
+                    var menuProductOptions = readLine()!!.toInt()
+
+                    when (menuProductOptions) {
+
+                        1 -> {
+
+                            println()
+                            println("List of all products on database: For specific product, choose the option 2.")
+                            println()
+                            productProcedures.listAllProduct()
+                            println()
+
+                        }
+
+                        2 -> {
+                            println()
+                            println("Type the Barcode's product")
+                            var searchBarCode = readLine()!!.toString().trim()
+                            if (searchBarCode.equals("")) {
+                                println("You need provide the barcode to find the product on database!")
+                                println("Please, go to option 2 and type the barcode!")
+                            } else {
+
+                                productProcedures.searchBarcodeProduct(searchBarCode)
+                            }
+                            println()
+                        }
+
+                        3 -> {
+
+                        }
+                        4 -> {
+
+                        }
+
+                        0 -> {
+                            menuProduct = true
+
+                        }
+                    }
+                } while (!menuProduct)
+
+                var objProduct = product()
+                objProduct.listAllProduct()
+
+            }//End of PRODUCT Menu
+
+        //Option 3 MAIN Menu
+            3 -> {
 
             }
 
-            //Option 2 MAIN Menu
-            2 ->{
-
-            }
-
-            //Option 3 MAIN Menu
-            3 ->{
-
-            }
-
-            //Option 4 MAIN Menu
+        //Option 4 MAIN Menu
             4 -> {
 
             }
 
 
-
-            //Exit Program
-            0 ->{
-              exitProgram = true
+        //Exit Program
+            0 -> {
+                exitProgram = true
                 println("Bye!")
             }
         }
 
-
+    }
 
 
 
