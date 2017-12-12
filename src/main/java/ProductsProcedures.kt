@@ -3,8 +3,11 @@ import java.sql.DriverManager
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
+
 class product{
+    var color = colors()
     var theClassName = DBConnection()
+
 
 
 
@@ -49,17 +52,31 @@ class product{
     }
 
     fun searchBarcodeProduct(barcode:String){
+
+
         var querySearchBarcode: String = "Select * from products where barcode='$barcode'"
 
         Class.forName(theClassName.theClassName)
         var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
         var ps: PreparedStatement = conn.prepareStatement(querySearchBarcode)
         var rs: ResultSet = ps.executeQuery()
-        while (rs.next()) {
-          println("-> (ID): " + rs.getString("id") + " (Name): " + rs.getString("name") + " (Model): " + rs.getString("model")+
-                  " (N Price): " + rs.getString("normalPrice") + " (L Price): " + rs.getString("lastPrice"))
-        }
 
+           var noFound: String? = ""
+
+            while (rs.next()) {
+                //check if there is data on name column
+                noFound = rs.getString("name")
+
+                println()
+                println(color.COLOR_YELLOW + "-> (ID): " + rs.getString("id") + " (Name): " + rs.getString("name") + " (Model): " + rs.getString("model") +
+                        " (N Price): " + rs.getString("normalPrice") + " (L Price): " + rs.getString("lastPrice") + color.RESET)
+
+        }
+           //if there is no data
+           if (noFound.equals("")){
+               println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+           }
+        ps.close()
 
     }
 
@@ -82,6 +99,8 @@ class product{
             println()
 
         }
+
+
         println("")
         println("Press any key to back to menu")
 

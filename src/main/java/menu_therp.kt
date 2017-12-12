@@ -15,7 +15,7 @@ var color = colors()
     //start a while loop to show the program menu
     do {
 
-        println(color.COLOR_BLUE + "################ The Hecton's Enterprise Resource Planning Menu ################ ")
+        println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
         println()
         println("___Main Menu -> Choose one of the options bellow_____")
         println()
@@ -25,7 +25,7 @@ var color = colors()
         println("4 - Sell")
         println("0 - Exit")
         println()
-        println("##################################################################################" + color.RESET)
+        println("##################################################################################")
         var mainMenu = readLine()!!.toString().trim()
         if (mainMenu.equals("")) {
             println()
@@ -493,13 +493,16 @@ var color = colors()
                         addStockBarcode = readLine().toString().trim()
 
                         if (addStockBarcode == "" || addStockBarcode == null ){
-                            println("You need to provide the barcode to add the product on stock")
+                            println(color.COLOR_RED + "You need to provide the barcode to add the product on stock" + color.RESET)
                         }
 
 
                     }while (addStockBarcode.equals(""))
 
                     stockProcedures.searchBarcodeProduct(addStockBarcode)
+
+                    println("Would you like to stock this product?")
+
 
 
                 }// end of -> 3
