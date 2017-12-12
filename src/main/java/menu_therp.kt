@@ -9,13 +9,13 @@ created by the Author to apply what he learned in the Kotlin programming languag
 
 
 fun main(args: Array<String>) {
-
+var color = colors()
     var exitProgram = false
 
     //start a while loop to show the program menu
     do {
 
-        println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+        println(color.COLOR_BLUE + "################ The Hecton's Enterprise Resource Planning Menu ################ ")
         println()
         println("___Main Menu -> Choose one of the options bellow_____")
         println()
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
         println("4 - Sell")
         println("0 - Exit")
         println()
-        println("##################################################################################")
+        println("##################################################################################" + color.RESET)
         var mainMenu = readLine()!!.toString().trim()
         if (mainMenu.equals("")) {
             println()
@@ -51,7 +51,7 @@ fun main(args: Array<String>) {
                     println("4 - List all users from database")
                     println("0 - Exit")
                     println()
-                    println("##################################################################################")
+                    println("##################################################################################" )
                     var menuCustomer = readLine()!!.toString().trim()
                     if (menuCustomer.equals("")) {
                         println()
@@ -478,10 +478,33 @@ fun main(args: Array<String>) {
                 }//End of PRODUCT Menu
 
 
-                //Option 3 MAIN Menu
+                //Option 3 MAIN Menu  STOCK
                 3 -> {
+                    println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                    println()
+                    println("___Main Menu -> Stock -> Add a new item (product) on stock")
+                    println()
 
-                }
+                    var addStockBarcode = ""
+                    var stockProcedures = product()
+                    do {
+
+                        println("Type the product's code that you want to add at stock")
+                        addStockBarcode = readLine().toString().trim()
+
+                        if (addStockBarcode == "" || addStockBarcode == null ){
+                            println("You need to provide the barcode to add the product on stock")
+                        }
+
+
+                    }while (addStockBarcode.equals(""))
+
+                    stockProcedures.searchBarcodeProduct(addStockBarcode)
+
+
+                }// end of -> 3
+
+
 
                 //Option 4 MAIN Menu
                 4 -> {
