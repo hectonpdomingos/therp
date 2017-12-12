@@ -29,8 +29,23 @@ class product{
 
     }
 
-    fun modifyProduct(){
+    fun modifyProduct(productField: String, productFieldValue: Any, productBarcode: String){
 
+      var queryModifyProduct: String = "UPDATE products set " + productField + "='" + productFieldValue + "' WHERE barcode='" + productBarcode + "'"
+
+        try{
+
+            Class.forName(theClassName.theClassName)
+            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            var ps: PreparedStatement = conn.prepareStatement(queryModifyProduct)
+            ps.execute()
+            println()
+            println("The SQL query thats sets $productField column the $productFieldValue value was executed")
+
+            println()
+        }catch (e: Exception){
+            println("Error: " + e.message)
+        }
     }
 
     fun searchBarcodeProduct(barcode:String){
