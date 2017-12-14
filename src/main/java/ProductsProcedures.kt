@@ -76,6 +76,7 @@ class product{
            if (noFound.equals("")){
                println(color.COLOR_RED + "Nothing found on database" + color.RESET)
            }
+
         ps.close()
 
     }
@@ -105,6 +106,74 @@ class product{
         println("Press any key to back to menu")
 
         readLine()
+
+    }
+
+
+    fun countItemsStock(table: String): Any{
+        var queryCountItems = "SELECT count(id) from $table"
+
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var ps: PreparedStatement = conn.prepareStatement(queryCountItems)
+        var rs: ResultSet = ps.executeQuery()
+
+        var count = rs.toString()
+        return count
+
+
+    }
+    fun searchIdProduct(barcode: String): Int? {
+        var searchIdProduct = "SELECT id from products where barcode="+barcode+";"
+
+         var productId: Int? =0
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var ps: PreparedStatement = conn.prepareStatement(searchIdProduct)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()){
+            productId = rs.getInt("id")
+        }
+
+        return productId
+
+    }
+    fun searchIdBarcodeStock(barcode: String): Any? {
+        var searchIdProduct = "SELECT id from stock where barcode="+barcode+";"
+
+        var productId: Any? =0
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var ps: PreparedStatement = conn.prepareStatement(searchIdProduct)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()){
+            productId = rs.getInt("id")
+        }
+
+        return productId
+
+    }
+
+
+
+
+
+    fun addProductStock(id: Int, barcode: String,qty: Int){
+        var queryAddProductStock = "INSERT INTO `therp`.`stock` (`id`,`barcode`, `qty`) VALUES ('"+id+"', '"+barcode+"', '"+qty+"');"
+        try{
+
+            Class.forName(theClassName.theClassName)
+            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            var ps: PreparedStatement = conn.prepareStatement(queryAddProductStock)
+            ps.execute()
+            println()
+            println(" Success! The barcode $barcode and the quantity $qty  was added on stock!")
+            println()
+        }catch (e: Exception){
+            println("Error: " + e.message)
+        }
+
+
 
     }
 
