@@ -487,24 +487,76 @@ var color = colors()
 
                     var addStockBarcode = ""
                     var stockProcedures = product()
+                    var idProduct: Int?
+                    var productExistsOnStock: Any? = 0
+                    var productExistsOnList: Any? = 0
                     do {
 
                         println("Type the product's code that you want to add at stock")
                         addStockBarcode = readLine().toString().trim()
 
+                        //search barcode on product list
+                        productExistsOnList  =  stockProcedures.searchIdProduct(addStockBarcode)
+
+                        //search the barcode on stock
+                        productExistsOnStock = stockProcedures.searchIdBarcodeStock(addStockBarcode)
                         if (addStockBarcode == "" || addStockBarcode == null ){
                             println(color.COLOR_RED + "You need to provide the barcode to add the product on stock" + color.RESET)
                         }
 
+                        if (productExistsOnList == 0){
+                            println()
+                            println(color.COLOR_RED + "There is no product on the list of products with this barcode. Backing to menu and add this product first." + color.RESET)
+                            addStockBarcode = "noFoundonList"
+                        }
 
                     }while (addStockBarcode.equals(""))
 
-                    stockProcedures.searchBarcodeProduct(addStockBarcode)
 
-                    println("Would you like to stock this product?")
+                    if (productExistsOnStock != 0 ){
+                        println()
+                        println(color.COLOR_RED + " The product with the barcode that you are trying to add already exists on stock database!" + color.RESET)
+                        println("Try another!")
+                        println()
+                    }else if(addStockBarcode.equals("noFoundonList")){
+                        //back to main menu to add new product
+                         println()
+                    }else{
+
+                        stockProcedures.searchBarcodeProduct(addStockBarcode)
+                        var qty: String = ""
+
+                        println("Would you like to stock this product? y(yes) - n(no)")
+                        var addProduct = readLine()!!.toLowerCase().trim()
+
+                        if (addProduct.equals("y") || addProduct.equals("yes")) {
+                            idProduct = stockProcedures.searchIdProduct(addStockBarcode)!!.toInt()
+
+                            do {
+                                println("You will add the $addStockBarcode barcode. Type the quantity for this item")
+                                qty = readLine()!!.toString().trim()
+
+                            } while (qty.equals(""))
 
 
+                            var addQty = qty!!.toInt()
 
+                            println("Quantidade $addQty")
+
+                            // add barcode and qty on stock
+                            stockProcedures.addProductStock(idProduct, addStockBarcode, addQty)
+
+
+                        } else if (addProduct.equals("n") || addProduct.equals("no")) {
+
+                            //do nothing
+
+                        } else {
+                            println("Wrong option")
+                        }
+
+
+                    }
                 }// end of -> 3
 
 
