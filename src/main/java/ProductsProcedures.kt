@@ -67,7 +67,7 @@ class product{
                 //check if there is data on name column
                 noFound = rs.getString("name")
 
-                println()
+                println("$barcode Product review info")
                 println(color.COLOR_YELLOW + "-> (ID): " + rs.getString("id") + " (Name): " + rs.getString("name") + " (Model): " + rs.getString("model") +
                         " (N Price): " + rs.getString("normalPrice") + " (L Price): " + rs.getString("lastPrice") + color.RESET)
 
@@ -76,6 +76,35 @@ class product{
            if (noFound.equals("")){
                println(color.COLOR_RED + "Nothing found on database" + color.RESET)
            }
+
+        ps.close()
+
+    }
+    fun searchBarcodeStock(barcode:String){
+
+
+        var querySearchBarcode: String = "Select id, barcode, qty from stock where barcode='$barcode'"
+
+        Class.forName(theClassName.theClassName)
+        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        var ps: PreparedStatement = conn.prepareStatement(querySearchBarcode)
+        var rs: ResultSet = ps.executeQuery()
+
+        var noFound: String? = ""
+
+        while (rs.next()) {
+            //check if there is data on name column
+            noFound = rs.getString("barcode")
+
+            println("$barcode has Quantity")
+            println(color.COLOR_YELLOW + "-> (ID): " + rs.getString("id") + " (Barcode): " + rs.getString("barcode") + " (Quantity): " + rs.getString("qty") +
+                     color.RESET)
+
+        }
+        //if there is no data
+        if (noFound.equals("")){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
 
         ps.close()
 
