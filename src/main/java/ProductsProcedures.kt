@@ -6,7 +6,7 @@ import java.sql.ResultSet
 
 class product{
     var color = colors()
-    var theClassName = DBConnection()
+    var connect = DBConnection()
 
 
 
@@ -18,8 +18,8 @@ class product{
                 "'"+barcode+"', '"+cost+"','"+normalPrice+"', '"+lastPrice+"', '"+totalTax+"');\n"
         try{
 
-            Class.forName(theClassName.theClassName)
-            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            Class.forName(connect.mysqlDriver)
+            var conn: Connection = DriverManager.getConnection(connect.pathConnection)
             var ps: PreparedStatement = conn.prepareStatement(queryAddProduct)
             ps.execute()
             println()
@@ -32,18 +32,37 @@ class product{
 
     }
 
-    fun modifyProduct(productField: String, productFieldValue: Any, productBarcode: String){
+    fun updateProduct(productField: String, productFieldValue: Any, productBarcode: String){
 
       var queryModifyProduct: String = "UPDATE products set " + productField + "='" + productFieldValue + "' WHERE barcode='" + productBarcode + "'"
 
         try{
 
-            Class.forName(theClassName.theClassName)
-            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            Class.forName(connect.mysqlDriver)
+            var conn: Connection = DriverManager.getConnection(connect.pathConnection)
             var ps: PreparedStatement = conn.prepareStatement(queryModifyProduct)
             ps.execute()
             println()
             println("The SQL query thats sets $productField column the $productFieldValue value was executed")
+
+            println()
+        }catch (e: Exception){
+            println("Error: " + e.message)
+        }
+    }
+
+    fun updateStock(barcode: String, newQty: Int, id: Int){
+
+        var queryModifyProduct: String = "UPDATE stock set " + barcode + "='" + newQty + "' WHERE id='" + id + "'"
+
+        try{
+
+            Class.forName(connect.mysqlDriver)
+            var conn: Connection = DriverManager.getConnection(connect.pathConnection)
+            var ps: PreparedStatement = conn.prepareStatement(queryModifyProduct)
+            ps.execute()
+            println()
+            println("The item $barcode on stock database was updated")
 
             println()
         }catch (e: Exception){
@@ -56,8 +75,8 @@ class product{
 
         var querySearchBarcode: String = "Select * from products where barcode='$barcode'"
 
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(querySearchBarcode)
         var rs: ResultSet = ps.executeQuery()
 
@@ -85,8 +104,8 @@ class product{
 
         var querySearchBarcode: String = "Select id, barcode, qty from stock where barcode='$barcode'"
 
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(querySearchBarcode)
         var rs: ResultSet = ps.executeQuery()
 
@@ -112,8 +131,8 @@ class product{
 
     fun  listAllProduct(){
         var listAllTasks = "SELECT * FROM products"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(listAllTasks)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -142,8 +161,8 @@ class product{
     fun countItemsStock(table: String): Any{
         var queryCountItems = "SELECT count(id) from $table"
 
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(queryCountItems)
         var rs: ResultSet = ps.executeQuery()
 
@@ -156,8 +175,8 @@ class product{
         var searchIdProduct = "SELECT id from products where barcode="+barcode+";"
 
          var productId: Int? =0
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(searchIdProduct)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()){
@@ -171,8 +190,8 @@ class product{
         var searchIdProduct = "SELECT id from stock where barcode="+barcode+";"
 
         var productId: Any? =0
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(searchIdProduct)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()){
@@ -191,8 +210,8 @@ class product{
         var queryAddProductStock = "INSERT INTO `therp`.`stock` (`id`,`barcode`, `qty`) VALUES ('"+id+"', '"+barcode+"', '"+qty+"');"
         try{
 
-            Class.forName(theClassName.theClassName)
-            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            Class.forName(connect.mysqlDriver)
+            var conn: Connection = DriverManager.getConnection(connect.pathConnection)
             var ps: PreparedStatement = conn.prepareStatement(queryAddProductStock)
             ps.execute()
             println()

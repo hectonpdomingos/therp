@@ -422,7 +422,7 @@ var color = colors()
                                       productBarcode = readLine()!!.toString().trim()
                                     }while (productBarcode.equals(""))
 
-                                productProcedures.modifyProduct(fieldProduct!!.toString(), fieldValueProduct!!, productBarcode!! )
+                                productProcedures.updateProduct(fieldProduct!!.toString(), fieldValueProduct!!, productBarcode!! )
                                 } //end of else
 
                             } //end of 3 ->
@@ -526,10 +526,23 @@ var color = colors()
                                 }
 
                                 2 -> {
+                                    var updateItemStock = product()
                                     println()
-                                    println("Update product on stock")
+                                    println("######### The Hecton's Enterprise Resource Planning Menu ############### ")
                                     println()
+                                    println("___Menu -> Stock -> Update_____")
+                                    println()
+                                    println("Type the barcode to update product on stock")
+                                    println()
+                                    do {
+                                    var updateItemStock = readLine()!!.toString().trim()
+                                    if (updateItemStock.equals("")){
+                                        println("You need to provide the barcode to update the item on Stock database")
+                                    }else {
 
+                                    }
+                                    }while(!updateItemStock.equals(""))
+                                    updateItemStock
                                 }
 
                                 3 -> {

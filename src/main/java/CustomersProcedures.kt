@@ -1,4 +1,3 @@
-import com.mysql.cj.api.exceptions.ExceptionInterceptor
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.PreparedStatement
@@ -17,8 +16,8 @@ class Customers {
                     "'" + lastName.trim() + "', '" + cpf.toString().trim().toInt() + "', '" + rg.trim() + "', '" + socialSecurity.trim() + "', '" + country.trim() + "', '" + city.trim() + "', '" + address.trim() + "', '" + zipcode + "', " +
                     "'" + phone.toString().trim().toInt() + "','" + email.trim() + "');\n"
 
-            Class.forName(theClassName.theClassName)
-            var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+            Class.forName(theClassName.mysqlDriver)
+            var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
             var ps: PreparedStatement = conn.prepareStatement(addNewCustomer)
             ps.execute()
             println()
@@ -36,8 +35,8 @@ class Customers {
 
     fun listCustomers() {
         var listAllTasks = "SELECT * FROM customers"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(listAllTasks)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -67,8 +66,8 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE firstName LIKE'%"+searchByFirstName.trim()+"%'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -96,8 +95,8 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE lastName LIKE'%"+searchByLastName.trim()+"%'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -128,8 +127,8 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE email LIKE'%"+searchByEmail.trim()+"%'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -160,8 +159,8 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE cpf LIKE'%"+searchBycpf.toString().trim().toInt()+"%'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -191,8 +190,8 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE socialSecurity LIKE'%"+searchBySocialSecurity.trim()+"%'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -222,8 +221,8 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE socialSecurity LIKE'%"+searchByPhone.toString().trim()+"%'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
@@ -251,8 +250,8 @@ class Customers {
         var queryUpdateCustomerInfo: String = "UPDATE customers set " + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
 
         println(queryUpdateCustomerInfo)
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
         psUpdate.execute()
         println("Customer Updated!")
@@ -261,8 +260,8 @@ class Customers {
     }
     fun updateCustomerIntFields(updateCustomerField: String, updateCustomerInfo: Int, idCustomer: Int) {
         var queryUpdateCustomerInfo: String = "UPDATE customers set " + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
-        Class.forName(theClassName.theClassName)
-        var conn: Connection = DriverManager.getConnection(theClassName.strConnessione)
+        Class.forName(theClassName.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
         var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
         psUpdate.execute()
 
