@@ -1,11 +1,11 @@
 
 class DBConnection {
-    var username = "root"
-    var password = "12domlei"
-    var host = "127.0.0.1"
-    var db = "therp"
-    var pathConnection: String = "jdbc:mysql://" + this.host + ":3306/" + this.db + "?user=" +
+    val username = "root"
+    val password = "12domlei"
+    val host = "127.0.0.1"
+    val db = "therp"
+    val pathConnection: String = "jdbc:mysql://" + this.host + ":3306/" + this.db + "?user=" +
             this.username + "&password=" + this.password + "&noAccessToProcedureBodies=true"
-    var mysqlDriver = "com.mysql.cj.jdbc.Driver"
+    val mysqlDriver = "com.mysql.cj.jdbc.Driver"
 
 }
