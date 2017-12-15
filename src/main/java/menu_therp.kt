@@ -481,6 +481,7 @@ var color = colors()
                 //Option 3 MAIN Menu  STOCK
                 3 -> {
                     var existStockMenu: Boolean = false
+                    var searchStock = product()
 
                     do{
                         println()
@@ -506,9 +507,22 @@ var color = colors()
                             when(stockOptions){
 
                                 1 -> {
-                                   println()
-                                   println("Search")
-                                   println()
+                                    println()
+                                    println("######### The Hecton's Enterprise Resource Planning Menu ############### ")
+                                    println()
+                                    println("___Menu -> Stock -> Search_____")
+                                    println()
+                                    println("Type the barcode that you want to search on stock database.")
+                                    var searchBarcode = readLine()!!.toString().trim()
+                                    if (searchBarcode.equals("")){
+                                        println("To search, you need to type the barcode: EX: 0001")
+
+                                    }else{
+                                    //Info on Product and stock table
+                                    searchStock.searchBarcodeProduct(searchBarcode)
+                                    searchStock.searchBarcodeStock(searchBarcode)
+                                    }
+
                                 }
 
                                 2 -> {
