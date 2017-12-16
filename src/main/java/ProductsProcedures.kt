@@ -5,6 +5,7 @@ import java.sql.ResultSet
 
 
 class product{
+    var checkmark = checkMarck()
     var color = colors()
     var connect = DBConnection()
 
@@ -51,9 +52,9 @@ class product{
         }
     }
 
-    fun updateStock(barcode: String, newQty: Int, id: Int){
+    fun updateStock(barcode: String, newQty: Int){
 
-        var queryModifyProduct: String = "UPDATE stock set " + barcode + "='" + newQty + "' WHERE id='" + id + "'"
+        var queryModifyProduct: String = "UPDATE stock set qty='" + newQty + "' WHERE barcode='" + barcode + "'"
 
         try{
 
@@ -62,7 +63,7 @@ class product{
             var ps: PreparedStatement = conn.prepareStatement(queryModifyProduct)
             ps.execute()
             println()
-            println("The item $barcode on stock database was updated")
+            println(checkmark.markok + "The item $barcode on stock database was updated"  + color.RESET )
 
             println()
         }catch (e: Exception){
@@ -190,6 +191,7 @@ class product{
         var searchIdProduct = "SELECT id from stock where barcode="+barcode+";"
 
         var productId: Any? =0
+
         Class.forName(connect.mysqlDriver)
         var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(searchIdProduct)
