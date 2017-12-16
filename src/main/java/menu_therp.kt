@@ -9,7 +9,7 @@ created by the Author to apply what he learned in the Kotlin programming languag
 
 
 fun main(args: Array<String>) {
-var color = colors()
+val color = colors()
     var exitProgram = false
 
     //start a while loop to show the program menu
@@ -26,7 +26,7 @@ var color = colors()
         println("0 - Exit")
         println()
         println("##################################################################################")
-        var mainMenu = readLine()!!.toString().trim()
+        val mainMenu = readLine()!!.toString().trim()
         if (mainMenu.equals("")) {
             println()
             println("Type the right option...")
@@ -47,7 +47,7 @@ var color = colors()
                     println()
                     println("1 - Search - Find a specific costumer")
                     println("2 - Add - Add a new client on the database")
-                    println("3 - Modify - Modify the client already in the database")
+                    println("3 - Update - Modify the client already in the database")
                     println("4 - List all users from database")
                     println("0 - Exit")
                     println()
@@ -120,7 +120,7 @@ var color = colors()
                                 println()
                                 println("___Menu -> Customers -> Modify the Customer Information _____")
                                 println()
-                                println("Which customer do you want modify the information? ")
+                                println("Which customer do you want update the information? ")
                                 println("Do you search the user or list all?")
                                 println("1 search || 2 list all")
                                 var whichCustomer = readLine()!!.toInt()
@@ -173,38 +173,38 @@ var color = colors()
                                 }
 
                                 println()
-                                println("Type the customer's ID to modify the information:  ")
+                                println("Type the customer's ID to update the information:  ")
                                 var customerID = readLine()!!.toInt()
                                 println()
-                                println("Which field do you want modify? Type the number ")
+                                println("Which field do you want update? Type the number ")
                                 println()
                                 println("1 Name | 2 Last Name | 3 CPF | 4 RG | 5 Social Security | 6 Country | 7 City ")
                                 println("8 Address | 9 Zipcode | 10 Phone | 11 Email ")
-                                var fieldToModify = readLine()!!.toInt()
+                                var fieldToUpdate = readLine()!!.toInt()
 
                                 var field: String = ""
 
-                                if (fieldToModify == 1) {
+                                if (fieldToUpdate == 1) {
                                     field = "firstName"
-                                } else if (fieldToModify == 2) {
+                                } else if (fieldToUpdate == 2) {
                                     field = "lastName"
-                                } else if (fieldToModify == 3) {
+                                } else if (fieldToUpdate == 3) {
                                     field = "cpf"
-                                } else if (fieldToModify == 4) {
+                                } else if (fieldToUpdate == 4) {
                                     field = "rg"
-                                } else if (fieldToModify == 5) {
+                                } else if (fieldToUpdate == 5) {
                                     field = "socialSecurity"
-                                } else if (fieldToModify == 6) {
+                                } else if (fieldToUpdate == 6) {
                                     field = "country"
-                                } else if (fieldToModify == 7) {
+                                } else if (fieldToUpdate == 7) {
                                     field = "city"
-                                } else if (fieldToModify == 8) {
+                                } else if (fieldToUpdate == 8) {
                                     field = "address"
-                                } else if (fieldToModify == 9) {
+                                } else if (fieldToUpdate == 9) {
                                     field = "zipcode"
-                                } else if (fieldToModify == 10) {
+                                } else if (fieldToUpdate == 10) {
                                     field = "phone"
-                                } else if (fieldToModify == 11) {
+                                } else if (fieldToUpdate == 11) {
                                     field = "email"
                                 } else {
                                     println()
@@ -261,7 +261,7 @@ var color = colors()
                     println()
                     println("1 - List all Products")
                     println("2 - Search my Barcode")
-                    println("3 - Modify product info")
+                    println("3 - Update product info")
                     println("4 - Add product")
                     println("0 - Exit")
                     println()
@@ -311,9 +311,9 @@ var color = colors()
 
                                 println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
                                 println()
-                                println("___Main Menu -> Products ->  Modify product info")
+                                println("___Main Menu -> Products ->  Update product info")
                                 println()
-                                println("Which field do you want modify? Type the number.")
+                                println("Which field do you want Update? Type the number.")
                                 println()
                                 println("1 - Name | 2 - Model | 3 - Manufacturer | 4 - Country | 5 - Size | 6 Weight | 7 - type")
                                 println("8 - barcode | 9 - cost | 10 - Normal Price | 11 - Last Price | 12 - Total Tax")
@@ -526,23 +526,52 @@ var color = colors()
                                 }
 
                                 2 -> {
-                                    var updateItemStock = product()
+                                    var objUpdateItemStock = product()
+                                    var confirmUpdateStock = false
                                     println()
                                     println("######### The Hecton's Enterprise Resource Planning Menu ############### ")
                                     println()
                                     println("___Menu -> Stock -> Update_____")
                                     println()
-                                    println("Type the barcode to update product on stock")
-                                    println()
-                                    do {
-                                    var updateItemStock = readLine()!!.toString().trim()
-                                    if (updateItemStock.equals("")){
-                                        println("You need to provide the barcode to update the item on Stock database")
+                                    var updateItemStockBarcode: String? = ""
+                                   do {
+                                        println("Type the barcode to update product on stock")
+                                        updateItemStockBarcode = readLine()!!.toString().trim()
+
+                                   }while(updateItemStockBarcode.equals(""))
+                                    //checking if there is the item on stock database
+                                    var itemOnStock = objUpdateItemStock.searchIdBarcodeStock(updateItemStockBarcode!!.toString())
+                                    if (itemOnStock == 0){
+                                        println("There is no $updateItemStockBarcode on Stock List.")
                                     }else {
 
+                                        var idStockItem = objUpdateItemStock.searchIdBarcodeStock(updateItemStockBarcode!!.toString())
+                                        //converting Any to Int ! BAD PRACTICE
+                                        var idStockItemInt: Int = idStockItem!!.toString().toInt()
+
+                                        var updateItemStoqueQuantity: String? = ""
+                                        do {
+                                            println("Type the quantity that you want to change.")
+                                            updateItemStoqueQuantity = readLine()!!.toString().trim()
+                                        }while (updateItemStoqueQuantity.equals(""))
+
+                                        //val updateItemStoqueQuantity
+                                        do {
+                                            println("Are you sure you want to update the $updateItemStockBarcode item and set the $updateItemStoqueQuantity quantity? ")
+                                            println(color.COLOR_BLUE +"Type y(yes) or n(no)" + color.RESET)
+                                            var confirmMyUpdate = readLine()!!.toString().trim()
+                                            if (confirmMyUpdate.equals("")) {
+                                                println("You need to type y(yes) or n(no)")
+                                            } else if (confirmMyUpdate.equals("n") || confirmMyUpdate.equals("no")) {
+                                                println("Backing to Stock menu...")
+                                            } else if (confirmMyUpdate.equals("y") || confirmMyUpdate.equals("yes")) {
+
+
+                                                objUpdateItemStock.updateStock(updateItemStockBarcode, updateItemStoqueQuantity!!.toInt())
+                                            }
+                                        } while (!!confirmUpdateStock)
+
                                     }
-                                    }while(!updateItemStock.equals(""))
-                                    updateItemStock
                                 }
 
                                 3 -> {
