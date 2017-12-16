@@ -19,6 +19,7 @@ class colors {
 
 }
    class checkMarck{
+       var markok = "\u001B[1m \u2713  \u001B[1m"
        fun marked(){
            val writer = PrintWriter(OutputStreamWriter(System.out, "UTF-8"), true)
            writer.println("\u001B[1m \u2713  \u001B[1m")
