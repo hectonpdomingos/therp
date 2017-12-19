@@ -665,7 +665,7 @@ val color = colors()
                                 0 -> {
 
                                     existStockMenu = true
-                                    println("Bye")
+                                    println("<-")
                                 }
 
                             }
@@ -690,6 +690,50 @@ val color = colors()
 
                 //Option 4 MAIN Menu
                 4 -> {
+                    var sell = Sell()
+                    var exitSellMenu = false
+                    do {
+                        println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                        println()
+                        println("___Main Menu -> Sell -> Choose one of options bellow.")
+                        println("1 - List all Invoices")
+                        println("2 - Search for a specific Invoice")
+                        println("3 - Create a invoice")
+                        println("0 - Exit")
+                        println()
+                        var mSell = readLine().toString().trim()
+                        if (mSell.equals("")){
+                            println("You need to choose one of the options")
+                        }else{
+                            var menuSell: Int?
+                            menuSell = mSell.toInt()
+                            if (menuSell < 0 || menuSell > 3){
+                                println("You need to choose one of the options")
+                            }else {
+
+                                when (menuSell) {
+
+                                    1 -> {
+                                        println("Listing all invoices on database....")
+                                     sell.listAllInvoices()
+                                    }
+
+                                    2 -> {
+
+                                    }
+
+                                    3 -> {
+
+                                    }
+
+                                    0 -> {
+
+                                    }
+                                }
+                            }
+                        }
+
+                    }while (!exitSellMenu)
 
                 }
 
