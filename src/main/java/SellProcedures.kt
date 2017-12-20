@@ -46,6 +46,50 @@ class Sell{
         readLine()
 
     }
+
+    fun searchInvoiceByFullName(firstName: String, lastName: String){
+        var querySearchInvoiceByFullName = "SELECT customers.id, customers.firstName, customers.lastName, invoice.id, invoice.customerId, invoice.invoiceDate \n" +
+                "from customers left join invoice on customers.id=invoice.customerId WHERE 1=1 AND customers.firstName=\"" +firstName+ "\" AND customers.lastName=\""+lastName+"\""
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
+        var ps: PreparedStatement = conn.prepareStatement(querySearchInvoiceByFullName)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()) {
+
+            println(color.COLOR_YELLOW +" -> (Customer ID): " + rs.getString("customers.id") + " (Name ): " + rs.getString("customers.firstName") +
+                    " " + rs.getString("customers.lastName") + " (Invoice ID): " + rs.getString("invoice.id") + " (Date): " + rs.getString("invoice.invoiceDate") +
+
+                    color.RESET
+            )
+            println()
+
+        }
+        println("")
+        println("Press any key to back to menu")
+        readLine()
+    }
+
+    fun searchInvoiceByDate(dateInoice: String){
+        var querySearchInvoiceByFullName = "SELECT customers.id, customers.firstName, customers.lastName, invoice.id, invoice.customerId, invoice.invoiceDate \n" +
+                "from customers left join invoice on customers.id=invoice.customerId WHERE 1=1 AND invoice.invoiceDate=\"" +dateInoice+ "\""
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
+        var ps: PreparedStatement = conn.prepareStatement(querySearchInvoiceByFullName)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()) {
+
+            println(color.COLOR_YELLOW +" -> (Customer ID): " + rs.getString("customers.id") + " (Name ): " + rs.getString("customers.firstName") +
+                    " " + rs.getString("customers.lastName") + " (Invoice ID): " + rs.getString("invoice.id") + " (Date): " + rs.getString("invoice.invoiceDate") +
+
+                    color.RESET
+            )
+            println()
+
+        }
+        println("")
+        println("Press any key to back to menu")
+        readLine()
+    }
 }
 //
 //fun main(args: Array<String>) {
