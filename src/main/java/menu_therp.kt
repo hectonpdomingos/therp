@@ -715,10 +715,79 @@ val color = colors()
 
                                     1 -> {
                                         println("Listing all invoices on database....")
-                                     sell.listAllInvoices()
+                                        sell.listAllInvoices()
                                     }
 
                                     2 -> {
+                                        var searchInvoice = Sell()
+                                        var exitSellSearch = false
+
+                                        //menu vars
+                                        var menuSellSearchFirstName: String?
+                                        var menuSellSearchLastName: String?
+                                        var menuSellSearchYear: Int?
+                                        var menuSellSearchMonth: Int?
+                                        var menuSellSearchDay: Int?
+                                        var menuSellSearchDate: String?
+
+                                        do {
+                                            println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
+                                            println()
+                                            println("___Main Menu -> Sell -> Search Invoices.")
+                                            println("")
+                                            println("1 - Customer  | 2 - Data | 3 - ID | 4 - Advanced search")
+                                            var getMenuSellSearch = readLine().toString()
+                                            if (getMenuSellSearch.equals("")){
+                                                println("You need to choose one of the options.")
+                                            }
+                                            else{
+                                                var menuSellSeach: Int = getMenuSellSearch.toInt()
+
+                                                when(menuSellSeach){
+                                                    1 ->{
+                                                        println("Type the first customer's name")
+                                                        menuSellSearchFirstName = readLine().toString().trim()
+                                                        println("Type the last customer's name")
+                                                        menuSellSearchLastName = readLine().toString().trim()
+                                                        searchInvoice.searchInvoiceByFullName(menuSellSearchFirstName,menuSellSearchLastName)
+
+                                                    }
+
+                                                    2 ->{
+                                                        println("Type the year")
+                                                        menuSellSearchYear = readLine()!!.toInt()
+                                                        println("Type the month")
+                                                        menuSellSearchMonth = readLine()!!.toInt()
+                                                        println("Type the day")
+                                                        menuSellSearchDay = readLine()!!.toInt()
+                                                        sell.searchInvoiceByDate(menuSellSearchYear,menuSellSearchMonth,menuSellSearchDay )
+
+                                                    }
+
+                                                    3 ->{
+                                                        println("Type the Invoice's ID that you want to search")
+                                                        var menuSellSearchId = readLine().toString().trim().toInt()
+                                                        sell.searchInvoiceById(menuSellSearchId)
+                                                    }
+
+                                                    4 -> {
+                                                        println("Type the first customer's name")
+                                                        menuSellSearchFirstName = readLine().toString().trim()
+                                                        println("Type the last customer's name")
+                                                        menuSellSearchLastName = readLine().toString().trim()
+                                                        println("Type the year")
+                                                        menuSellSearchYear = readLine()!!.toInt()
+                                                        println("Type the month")
+                                                        menuSellSearchMonth = readLine()!!.toInt()
+                                                        println("Type the day")
+                                                        menuSellSearchDay = readLine()!!.toInt()
+
+                                                        searchInvoice.searchInvoiceAdvanced(menuSellSearchFirstName, menuSellSearchLastName, menuSellSearchYear, menuSellSearchMonth, menuSellSearchDay)
+
+                                                    }
+                                                }
+                                            }
+                                        }while (!exitSellSearch)
 
                                     }
 
