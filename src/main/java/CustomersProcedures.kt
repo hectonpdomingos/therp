@@ -4,11 +4,13 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 
 class Customers {
-    var theClassName = DBConnection()
+    var color = colors()
+    var checkmark = checkMarck()
+    var connect = DBConnection()
+    var customerFound = false
 
     fun addCustomer(firstName: String, lastName: String, cpf: Int, rg: String, socialSecurity: String, country: String,
                     city: String, address: String, zipcode: Int, phone: Int, email: String) {
-
 
         try {
             var addNewCustomer: String = "INSERT INTO `therp`.`customers` (`firstName`, `lastName`, `cpf`, `registroGeral`, " +
@@ -16,8 +18,8 @@ class Customers {
                     "'" + lastName.trim() + "', '" + cpf.toString().trim().toInt() + "', '" + rg.trim() + "', '" + socialSecurity.trim() + "', '" + country.trim() + "', '" + city.trim() + "', '" + address.trim() + "', '" + zipcode + "', " +
                     "'" + phone.toString().trim().toInt() + "','" + email.trim() + "');\n"
 
-            Class.forName(theClassName.mysqlDriver)
-            var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+            Class.forName(connect.mysqlDriver)
+            var conn: Connection = DriverManager.getConnection(connect.pathConnection)
             var ps: PreparedStatement = conn.prepareStatement(addNewCustomer)
             ps.execute()
             println()
@@ -27,19 +29,21 @@ class Customers {
             println("Error: " + e.message)
         }
 
-
-
-
     }
 
 
     fun listCustomers() {
         var listAllTasks = "SELECT * FROM customers"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(listAllTasks)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
 
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
@@ -53,6 +57,12 @@ class Customers {
             println()
 
         }
+        //if there is no data
+        if (customerFound == false){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
+
+        ps.close()
         println("")
         println("Press any key to back to menu")
 
@@ -66,11 +76,16 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE firstName LIKE'%"+searchByFirstName.trim()+"%'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
 
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
@@ -95,11 +110,55 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE lastName LIKE'%"+searchByLastName.trim()+"%'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
+
+            println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
+                    " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
+                    " (Registro Geral (BR)): " + rs.getString("registroGeral") +
+                    " (Social Security (USA)): " + rs.getString("socialSecurity") + "\n" +
+                    " (Country): " + rs.getString("country") + " (City) : " + rs.getString("city") +
+                    " (Address): " + rs.getString("address") + " (Zipcode): " + rs.getString("zipcode") +
+                    " (Phone): " + rs.getString("phone") + " (Email): " + rs.getString("email") +
+                    " (Added in): " + rs.getString("created")
+            )
+            println()
+        }
+        //if there is no data
+        if (customerFound == false){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
+
+        ps.close()
+        println("")
+        println("Press any key to back to menu")
+        println("")
+        readLine()
+
+
+
+    }
+
+    fun searchCustomerByFullName(firstName: String, lastName: String){
+        var querySearchCustomerByFullName = "SELECT * FROM customers WHERE firstName='"+firstName+"' AND lastName='"+lastName+"'"
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
+        var ps: PreparedStatement = conn.prepareStatement(querySearchCustomerByFullName)
+        var rs: ResultSet = ps.executeQuery()
+        while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
 
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
@@ -127,11 +186,16 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE email LIKE'%"+searchByEmail.trim()+"%'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
 
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
@@ -159,12 +223,16 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE cpf LIKE'%"+searchBycpf.toString().trim().toInt()+"%'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
-
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
                     " (Registro Geral (BR)): " + rs.getString("registroGeral") +
@@ -176,6 +244,12 @@ class Customers {
             )
             println()
         }
+        //if there is no data
+        if (customerFound == false){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
+
+        ps.close()
         println("")
         println("Press any key to back to menu")
         println("")
@@ -190,11 +264,16 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE socialSecurity LIKE'%"+searchBySocialSecurity.trim()+"%'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
 
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
@@ -207,6 +286,12 @@ class Customers {
             )
             println()
         }
+        //if there is no data
+        if (customerFound == false){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
+
+        ps.close()
         println("")
         println("Press any key to back to menu")
         println("")
@@ -221,11 +306,16 @@ class Customers {
         println("The result of your search...")
         println("")
         var findQuery = "SELECT * FROM customers WHERE socialSecurity LIKE'%"+searchByPhone.toString().trim()+"%'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var ps: PreparedStatement = conn.prepareStatement(findQuery)
         var rs: ResultSet = ps.executeQuery()
         while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
 
             println(" -> (ID): " + rs.getString("id") + " (First Name): " + rs.getString("firstName") +
                     " (Last Name): " + rs.getString("lastName") + " (CPF): " + rs.getString("cpf") +
@@ -238,30 +328,67 @@ class Customers {
             )
             println()
         }
+        //if there is no data
+        if (customerFound == false){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
+
+        ps.close()
         println("")
         println("Press any key to back to menu")
         println("")
         readLine()
 
     }
+    fun searchCustomerById(id: Int){
+
+        var queryChooseCustomerById = "SELECT id, firstName, lastName, address, country FROM customers WHERE id='"+id+"';"
+
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
+        var ps: PreparedStatement = conn.prepareStatement(queryChooseCustomerById)
+        var rs: ResultSet = ps.executeQuery()
+
+        while (rs.next()) {
+            if (rs.getString("firstName") != ""){
+                customerFound = true
+            }else{
+                customerFound = false
+            }
+            println(color.COLOR_YELLOW + "-> (ID): " + rs.getString("id") + " (Name): " + rs.getString("firstName")  + "  " + rs.getString("lastName")  +
+                    " (Address): " + rs.getString("address")  + " " + rs.getString("country") +
+                    color.RESET)
+
+        }
+        //if there is no data
+        if (customerFound == false){
+            println(color.COLOR_RED + "Nothing found on database" + color.RESET)
+        }
+
+        ps.close()
+
+    }
+
+
+
 
     fun updateCustomerStringField(updateCustomerField: String, updateCustomerInfo: String, idCustomer: Int) {
 
         var queryUpdateCustomerInfo: String = "UPDATE customers set " + updateCustomerField.trim() + "='" + updateCustomerInfo.trim() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
 
         println(queryUpdateCustomerInfo)
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
         psUpdate.execute()
-        println("Customer Updated!")
+        println(checkmark.markok + "Customer Updated!")
 
 
     }
     fun updateCustomerIntFields(updateCustomerField: String, updateCustomerInfo: Int, idCustomer: Int) {
         var queryUpdateCustomerInfo: String = "UPDATE customers set " + updateCustomerField.trim() + "='" + updateCustomerInfo.toString().trim().toInt() + "' WHERE id='" + idCustomer.toString().trim().toInt() + "'"
-        Class.forName(theClassName.mysqlDriver)
-        var conn: Connection = DriverManager.getConnection(theClassName.pathConnection)
+        Class.forName(connect.mysqlDriver)
+        var conn: Connection = DriverManager.getConnection(connect.pathConnection)
         var psUpdate: PreparedStatement = conn.prepareStatement(queryUpdateCustomerInfo)
         psUpdate.execute()
 
