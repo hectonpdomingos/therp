@@ -6,9 +6,12 @@ created by the Author to apply what he learned in the Kotlin programming languag
  */
 
 
-
+import java.util.Date;
 
 fun main(args: Array<String>) {
+var date = Date()
+    println(date)
+
 val color = colors()
     var exitProgram = false
 
@@ -678,10 +681,6 @@ val color = colors()
                         }
 
 
-
-
-
-
                     }while (!existStockMenu)
 
                 }// end of -> 3
@@ -728,7 +727,7 @@ val color = colors()
                                         var menuSellSearchYear: Int?
                                         var menuSellSearchMonth: Int?
                                         var menuSellSearchDay: Int?
-                                        var menuSellSearchDate: String?
+
 
                                         do {
                                             println("################ The Hecton's Enterprise Resource Planning Menu ################ ")
@@ -791,7 +790,8 @@ val color = colors()
 
                                     }
 
-                                    3 -> {
+                                    3 -> { //Create invoice option
+
 
                                     }
 
@@ -804,7 +804,8 @@ val color = colors()
 
                     }while (!exitSellMenu)
 
-                }
+                }//end of the sell option
+
 
 
                 //Exit Program
